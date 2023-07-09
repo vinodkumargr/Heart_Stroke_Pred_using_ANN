@@ -33,4 +33,4 @@ pip install -r requirements.txt
 python main.py
 ```
 ## Results
-After training the model using Artificial Neural Networks (ANN) on the provided dataset, it achieves an accuracy of 85% in predicting heart stroke occurrences. The model's performance is evaluated using various evaluation metrics such as precision, recall, and F1-score.
+After training the model using Artificial Neural Networks (ANN) on the provided dataset, it achieves an accuracy of 97.47% in predicting heart stroke occurrences. The model's performance is evaluated using various evaluation metrics such as precision, recall, and F1-score, and the model is better at it's performance.
