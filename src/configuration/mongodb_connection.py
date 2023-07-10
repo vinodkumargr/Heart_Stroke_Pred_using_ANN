@@ -16,13 +16,6 @@ from pymongo.database import Database
 ca = certifi.where()
 
 class MongoDBClient:
-    """
-    Class Name :   export_data_into_feature_store
-    Description :   This method exports the dataframe from mongodb feature store as dataframe 
-    
-    Output      :   connection to mongodb database
-    On Failure  :   raises an exception
-    """
     client = None
 
     def __init__(self, database_name=DATABASE_NAME) -> None:
