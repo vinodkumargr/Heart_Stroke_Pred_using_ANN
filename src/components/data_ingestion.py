@@ -31,16 +31,15 @@ class DataIngestion:
             #df = pd.DataFrame= utils.get_as_df(database_name=database.DATABASE_NAME, 
             #                                collection_name=database.COLLECTION_NAME)
             logging.info("Read data from MongoDB")
+            logging.info(df.shape)
 
 
             # writing column names into schema.yaml file
             logging.info("column names writing into schema.yaml file")
             data_columns = df.columns
-            report = json.dumps(pd.DataFrame(data_columns).to_dict())
-            #report = data_columns.json()
-            json_report = json.loads(report)
-        
-            utils.write_yaml_file(file_path= entity.SCHEMA_YAML_FILE, content=json_report)
+            report = list(data_columns)
+                
+            utils.write_yaml_file(file_path= entity.SCHEMA_YAML_FILE, content=report)
 
             logging.info("written column names into schema.yaml file")
 

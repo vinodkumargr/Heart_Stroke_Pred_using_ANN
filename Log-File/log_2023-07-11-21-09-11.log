@@ -1,0 +1,9 @@
+[2023-07-11 21:09:15,561] root - INFO - Data Ingestion Started .............
+[2023-07-11 21:09:15,568] root - INFO - Read data from MongoDB
+[2023-07-11 21:09:15,568] root - INFO - (5110, 12)
+[2023-07-11 21:09:15,568] root - INFO - column names writing into schema.yaml file
+[2023-07-11 21:09:15,569] root - INFO - written column names into schema.yaml file
+[2023-07-11 21:09:15,571] root - INFO - spliting into train, test and validation is done
+[2023-07-11 21:09:15,571] root - INFO - storing data into artifacts
+[2023-07-11 21:09:15,586] root - INFO - stored data into artifacs...
+[2023-07-11 21:09:15,586] root - INFO - Exiting data ingestion...

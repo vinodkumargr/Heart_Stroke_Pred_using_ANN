@@ -5,12 +5,13 @@ from src.exception import CustomException
 from src.logger import logging
 from src import config
 import yaml, pickle
-
+from src.constants import database
+from data_dump import client
 
 def get_as_df(database_name:str , collection_name:str)-> pd.DataFrame:
     try:
         logging.info("Reading data from mongoDB")
-        df = pd.DataFrame(list(config.mongo_client[database_name][collection_name].find()))
+        df = pd.DataFrame(list(client[database.DATABASE_NAME][database.COLLECTION_NAME].find()))
         
         logging.info(f"Found data shape : {df.shape}")
         if "_id" in df.columns:
