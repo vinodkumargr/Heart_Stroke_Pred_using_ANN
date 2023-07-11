@@ -1,0 +1,13 @@
+'0':
+  '0': id
+  '1': gender
+  '10': smoking_status
+  '11': stroke
+  '2': age
+  '3': hypertension
+  '4': heart_disease
+  '5': ever_married
+  '6': work_type
+  '7': Residence_type
+  '8': avg_glucose_level
+  '9': bmi

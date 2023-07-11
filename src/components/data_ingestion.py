@@ -2,12 +2,12 @@ from src.logger import logging
 from src.exception import CustomException
 import pandas as pd
 import numpy as np
-import os, sys
+import os, sys, json
 from src.entity import artifacts_entity, config_entity
 from src import utils
 from src.constants import database
 from sklearn.model_selection import train_test_split
-
+from src import entity
 
 
 class DataIngestion:
@@ -17,27 +17,6 @@ class DataIngestion:
 
         except Exception as e:
             raise CustomException
-        
-        
-    def split_into_train_validation(self, df:pd.DataFrame) -> pd.DataFrame:
-        try:
-
-            data = pd.read_csv(df)
-            X_train, X_val, y_train, y_val = train_test_split(data, test_size=0.2, random_state=42)
-
-            return X_train, y_train
-        except Exception as e:
-            raise CustomException(e, sys)
-        
-        
-    def split_into_validation_test(self, df:pd.DataFrame)-> pd.DataFrame:
-        try:
-
-            data = pd.read_csv(df)
-            
-
-        except Exception as e:
-            raise CustomException(e, sys)
         
 
         
@@ -54,8 +33,20 @@ class DataIngestion:
             logging.info("Read data from MongoDB")
 
 
+            # writing column names into schema.yaml file
+            logging.info("column names writing into schema.yaml file")
+            data_columns = df.columns
+            report = json.dumps(pd.DataFrame(data_columns).to_dict())
+            #report = data_columns.json()
+            json_report = json.loads(report)
+        
+            utils.write_yaml_file(file_path= entity.SCHEMA_YAML_FILE, content=json_report)
+
+            logging.info("written column names into schema.yaml file")
+
             train_df, validation_df = train_test_split(df, test_size=0.2, random_state=42)
             validation_df, test_df = train_test_split(validation_df, test_size=0.5, random_state=42)
+
             logging.info("spliting into train, test and validation is done")
 
             logging.info("storing data into artifacts")
