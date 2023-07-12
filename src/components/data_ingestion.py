@@ -13,6 +13,7 @@ from src import entity
 class DataIngestion:
     def __init__(self, data_ingestion_config:config_entity.DataIngestionConfig):
         try:
+            
             self.data_ingestion_config = data_ingestion_config
 
         except Exception as e:
@@ -31,6 +32,7 @@ class DataIngestion:
             #df = pd.DataFrame= utils.get_as_df(database_name=database.DATABASE_NAME, 
             #                                collection_name=database.COLLECTION_NAME)
             logging.info("Read data from MongoDB")
+            df = df.drop(columns=['id'], axis=1)
             logging.info(df.shape)
 
 
@@ -38,7 +40,7 @@ class DataIngestion:
             logging.info("column names writing into schema.yaml file")
             data_columns = df.columns
             report = list(data_columns)
-                
+ 
             utils.write_yaml_file(file_path= entity.SCHEMA_YAML_FILE, content=report)
 
             logging.info("written column names into schema.yaml file")

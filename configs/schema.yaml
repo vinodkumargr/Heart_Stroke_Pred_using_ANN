@@ -1,4 +1,3 @@
-- id
 - gender
 - age
 - hypertension
@@ -10,3 +9,8 @@
 - bmi
 - smoking_status
 - stroke
+
+# is_columns_missing in (train, validation, test):
+[]
+[]
+[]

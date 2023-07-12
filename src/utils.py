@@ -62,6 +62,14 @@ def write_yaml_file(file_path: str, content: object) -> None:
     except Exception as e:
         raise CustomException(e, sys)
 
+def append_yaml_file(file_path: str, content: object) -> None:
+    try:
+        
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        with open(file_path, "a") as file:
+            yaml.dump(content, file)
+    except Exception as e:
+        raise CustomException(e, sys)
 
 
 def save_object(file_path: str, obj: object) -> None:

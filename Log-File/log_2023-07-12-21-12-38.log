@@ -1,0 +1,19 @@
+[2023-07-12 21:12:40,175] root - INFO - Data Ingestion Started .............
+[2023-07-12 21:12:40,183] root - INFO - Read data from MongoDB
+[2023-07-12 21:12:40,184] root - INFO - (5110, 11)
+[2023-07-12 21:12:40,184] root - INFO - column names writing into schema.yaml file
+[2023-07-12 21:12:40,184] root - INFO - written column names into schema.yaml file
+[2023-07-12 21:12:40,186] root - INFO - spliting into train, test and validation is done
+[2023-07-12 21:12:40,186] root - INFO - storing data into artifacts
+[2023-07-12 21:12:40,205] root - INFO - stored data into artifacs...
+[2023-07-12 21:12:40,205] root - INFO - Exiting data ingestion...
+[2023-07-12 21:12:40,205] root - INFO - data validation stage started ....
+[2023-07-12 21:12:40,205] root - INFO - reading data from data_ingestion_artifacts
+[2023-07-12 21:12:40,214] root - INFO - In train_df : 
+[2023-07-12 21:12:40,219] root - INFO - Missing columns : []
+[2023-07-12 21:12:40,219] root - INFO - In validation_df : 
+[2023-07-12 21:12:40,221] root - INFO - Missing columns : []
+[2023-07-12 21:12:40,222] root - INFO - In test_df : 
+[2023-07-12 21:12:40,223] root - INFO - Missing columns : []
+[2023-07-12 21:12:40,224] root - INFO - Exporting data into data_validation_artifacts
+[2023-07-12 21:12:40,240] root - INFO - Exiting data_validation stage
