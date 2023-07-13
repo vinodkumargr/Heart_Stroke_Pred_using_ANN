@@ -13,3 +13,10 @@ class DataValidationArtifact:
     valid_test_path:str
     valid_validation_path:str
     
+
+@dataclass
+class DataTransformationArtifact:
+    transform_train_path:str
+    transform_validation_path:str
+    transform_test_path:str
+    pre_process_object_path:str

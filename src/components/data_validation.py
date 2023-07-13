@@ -75,10 +75,10 @@ class DataValidation:
             test_df.to_csv(path_or_buf=self.data_validation_config.valid_test_path, index=False, header=True)
 
 
-            data_validation_artifacts = artifacts_entity.DataIngestionArtifact(
-                train_data_path=self.data_validation_config.valid_train_path,
-                validation_data_path=self.data_validation_config.valid_validation_path,
-                test_data_path=self.data_validation_config.valid_test_path
+            data_validation_artifacts = artifacts_entity.DataValidationArtifact(
+                valid_train_path=self.data_validation_config.valid_train_path,
+                valid_validation_path=self.data_validation_config.valid_validation_path,
+                valid_test_path=self.data_validation_config.valid_test_path
             )
 
             logging.info("Exiting data_validation stage")

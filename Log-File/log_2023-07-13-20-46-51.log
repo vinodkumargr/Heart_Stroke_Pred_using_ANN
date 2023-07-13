@@ -1,0 +1,25 @@
+[2023-07-13 20:46:52,969] root - INFO - Data Ingestion Started .............
+[2023-07-13 20:46:52,976] root - INFO - Read data from MongoDB
+[2023-07-13 20:46:52,977] root - INFO - (5110, 11)
+[2023-07-13 20:46:52,977] root - INFO - column names writing into schema.yaml file
+[2023-07-13 20:46:52,978] root - INFO - written column names into schema.yaml file
+[2023-07-13 20:46:52,980] root - INFO - spliting into train, test and validation is done
+[2023-07-13 20:46:52,980] root - INFO - storing data into artifacts
+[2023-07-13 20:46:52,998] root - INFO - stored data into artifacs...
+[2023-07-13 20:46:52,998] root - INFO - Exiting data ingestion...
+[2023-07-13 20:46:52,999] root - INFO - data validation stage started ....
+[2023-07-13 20:46:52,999] root - INFO - reading data from data_ingestion_artifacts
+[2023-07-13 20:46:53,007] root - INFO - In train_df : 
+[2023-07-13 20:46:53,012] root - INFO - Missing columns : []
+[2023-07-13 20:46:53,012] root - INFO - In validation_df : 
+[2023-07-13 20:46:53,014] root - INFO - Missing columns : []
+[2023-07-13 20:46:53,015] root - INFO - In test_df : 
+[2023-07-13 20:46:53,017] root - INFO - Missing columns : []
+[2023-07-13 20:46:53,017] root - INFO - Exporting data into data_validation_artifacts
+[2023-07-13 20:46:53,032] root - INFO - Exiting data_validation stage
+[2023-07-13 20:46:53,032] root - INFO - Data Transformation is started ...
+[2023-07-13 20:46:53,032] root - INFO - reading data from data_ingestion_artifacts
+[2023-07-13 20:46:53,041] root - INFO - Got numerical, categorical, transformation columns from schema config
+[2023-07-13 20:46:53,041] root - INFO - Created preprocessor object from ColumnTransformer
+[2023-07-13 20:46:53,041] root - INFO - Exited get_transformer method of DataTransformation class
+[2023-07-13 20:46:53,041] root - INFO - Applying transformer object
