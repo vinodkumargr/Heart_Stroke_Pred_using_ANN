@@ -1,7 +1,5 @@
 from src.logger import logging
 from src.exception import CustomException
-from src.components.data_ingestion import DataIngestion
-from src.components.data_validation import DataValidation
 from src import entity
 from src.entity import artifacts_entity, config_entity
 from src import utils
@@ -31,12 +29,13 @@ class DataTransformation:
         except Exception as e:
             raise CustomException(e, sys)
         
+        
 
     def get_transformer(self):
         try:
             
             numerical_columns = ['age', 'hypertension', 'heart_disease']
-            categorical_columns = ['gender', 'ever_married', 'work_type', 'Residence_type', 'smoking_status']
+            categorical_columns = ['ever_married', 'work_type', 'smoking_status']
             transform_columns = ['avg_glucose_level', 'bmi']
         
             numeric_pipeline = Pipeline(steps=[
@@ -99,6 +98,10 @@ class DataTransformation:
             transformer = self.get_transformer()
 
 
+            logging.info(f"fNumber of X_train:{input_train_features.shape}")
+            logging.info(f"fNumber of X_test:{input_test_features.shape}")
+            logging.info(f"fNumber of X_valid:{input_validatoin_features.shape}")
+
             # Perform the transformation on the train and test data
             logging.info("Applying transformer object")
             input_train_preprocessing_arr = transformer.fit_transform(input_train_features)
@@ -109,7 +112,7 @@ class DataTransformation:
 
 
             # Smotten object
-            smt = SMOTEENN(sampling_strategy="minority")
+            smt = SMOTEENN(sampling_strategy="minority", random_state=42)
 
 
             # smotten on train
@@ -134,8 +137,6 @@ class DataTransformation:
                 input_test_preprocessing_arr, out_test_feature
             )
             logging.info("Applied SMOTEENN on testing dataset")
-
-
 
 
             # combine the input arr and output feature

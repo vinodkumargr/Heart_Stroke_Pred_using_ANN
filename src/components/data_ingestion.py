@@ -32,7 +32,9 @@ class DataIngestion:
             #df = pd.DataFrame= utils.get_as_df(database_name=database.DATABASE_NAME, 
             #                                collection_name=database.COLLECTION_NAME)
             logging.info("Read data from MongoDB")
-            df = df.drop(columns=['id'], axis=1)
+
+            logging.info("dropping irrelavent columns")
+            df = df.drop(columns=['id', 'Residence_type','gender'], axis=1)
             logging.info(df.shape)
 
 
@@ -47,6 +49,8 @@ class DataIngestion:
 
             train_df, validation_df = train_test_split(df, test_size=0.2, random_state=42)
             validation_df, test_df = train_test_split(validation_df, test_size=0.5, random_state=42)
+
+            logging.info(f"train : {train_df.shape} , valid : {validation_df.shape}, test_df : {test_df.shape}")
 
             logging.info("spliting into train, test and validation is done")
 

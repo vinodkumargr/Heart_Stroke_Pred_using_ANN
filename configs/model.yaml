@@ -1,0 +1,50 @@
+null
+...
+Model report after tuning and training with best params
+...
+'best Accuracy : 0.8301404853128991'
+!!set
+? "report :               precision    recall  f1-score   support\n\n         0.0\
+  \       0.81      0.83      0.82       360\n         1.0       0.85      0.83  \
+  \    0.84       423\n\n    accuracy                           0.83       783\n \
+  \  macro avg       0.83      0.83      0.83       783\nweighted avg       0.83 \
+  \     0.83      0.83       783\n"
+: null
+null
+...
+Model report after tuning and training with best params
+...
+'best Accuracy : 0.8659003831417624'
+!!set
+? "report :               precision    recall  f1-score   support\n\n         0.0\
+  \       0.87      0.83      0.85       360\n         1.0       0.86      0.90  \
+  \    0.88       423\n\n    accuracy                           0.87       783\n \
+  \  macro avg       0.87      0.86      0.86       783\nweighted avg       0.87 \
+  \     0.87      0.87       783\n"
+: null
+null
+...
+null
+...
+Model report after tuning and training with best params
+...
+'best Accuracy : 0.8480204342273308'
+!!set
+? "report :               precision    recall  f1-score   support\n\n         0.0\
+  \       0.92      0.73      0.82       360\n         1.0       0.81      0.95  \
+  \    0.87       423\n\n    accuracy                           0.85       783\n \
+  \  macro avg       0.86      0.84      0.84       783\nweighted avg       0.86 \
+  \     0.85      0.85       783\n"
+: null
+null
+...
+Model report after tuning and training with best params
+...
+'best Accuracy : 0.855683269476373'
+!!set
+? "report :               precision    recall  f1-score   support\n\n         0.0\
+  \       0.86      0.82      0.84       360\n         1.0       0.85      0.89  \
+  \    0.87       423\n\n    accuracy                           0.86       783\n \
+  \  macro avg       0.86      0.85      0.85       783\nweighted avg       0.86 \
+  \     0.86      0.86       783\n"
+: null

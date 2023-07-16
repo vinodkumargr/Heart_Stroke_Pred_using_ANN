@@ -20,3 +20,13 @@ class DataTransformationArtifact:
     transform_validation_path:str
     transform_test_path:str
     pre_process_object_path:str
+
+
+@dataclass
+class ModelTrainerArtifact:
+    model_path:str
+    pre_processing_obj:str
+    r2_score:float
+    model_config_path:str
+
+

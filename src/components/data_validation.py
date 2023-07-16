@@ -44,6 +44,45 @@ class DataValidation:
         except Exception as e:
             raise CustomException(e,sys)
         
+
+
+
+    def outlier_removal(self, column:str, df:pd.DataFrame):
+        try:
+            upper_limit = df[column].mean() + 3*df[column].std()
+            lower_limit = df[column].mean() - 3*df[column].std()
+
+            df = df[ (df[column] < upper_limit) & (df[column] > lower_limit) ]
+
+            return df
+        
+        except Exception as e:
+            raise CustomException(e, sys)
+        
+
+    def outlier_removal(self, df:pd.DataFrame):
+        try:
+            upper_limit = df['bmi'].mean() + 3*df['bmi'].std()
+            lower_limit = df['bmi'].mean() - 3*df['bmi'].std()
+
+            df = df[ (df['bmi'] < upper_limit) & (df['bmi'] > lower_limit) ]
+
+            return df
+        
+        except Exception as e:
+            raise CustomException(e, sys)
+        
+
+    #def skew_column(self, df:pd.DataFrame):
+    #    try:
+
+    #        df['avg_glucose_level'].skew(axis=0)
+
+    #        return df
+        
+    #    except Exception as e:
+    #        raise CustomException(e, sys)
+    
         
     def initiate_data_validation(self) -> artifacts_entity.DataValidationArtifact:
         try:
@@ -66,6 +105,11 @@ class DataValidation:
             logging.info("In test_df : ")
             test_status = self.all_columns_exists(previous_df=pd.read_csv(self.data_ingestion_artifacts.test_data_path),
                                                   present_df=test_df)
+            
+
+            train_df = self.outlier_removal(df=train_df)
+            validation_df = self.outlier_removal(df=validation_df)
+            test_df = self.outlier_removal(df=test_df)
 
 
             logging.info("Exporting data into data_validation_artifacts")

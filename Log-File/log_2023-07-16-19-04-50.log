@@ -1,0 +1,50 @@
+[2023-07-16 19:04:54,237] root - INFO - Data Ingestion Started .............
+[2023-07-16 19:04:54,245] root - INFO - Read data from MongoDB
+[2023-07-16 19:04:54,245] root - INFO - dropping irrelavent columns
+[2023-07-16 19:04:54,246] root - INFO - (5110, 9)
+[2023-07-16 19:04:54,246] root - INFO - column names writing into schema.yaml file
+[2023-07-16 19:04:54,247] root - INFO - written column names into schema.yaml file
+[2023-07-16 19:04:54,248] root - INFO - train : (4088, 9) , valid : (511, 9), test_df : (511, 9)
+[2023-07-16 19:04:54,248] root - INFO - spliting into train, test and validation is done
+[2023-07-16 19:04:54,248] root - INFO - storing data into artifacts
+[2023-07-16 19:04:54,262] root - INFO - stored data into artifacs...
+[2023-07-16 19:04:54,262] root - INFO - Exiting data ingestion...
+[2023-07-16 19:04:54,262] root - INFO - data validation stage started ....
+[2023-07-16 19:04:54,262] root - INFO - reading data from data_ingestion_artifacts
+[2023-07-16 19:04:54,269] root - INFO - In train_df : 
+[2023-07-16 19:04:54,272] root - INFO - Missing columns : []
+[2023-07-16 19:04:54,272] root - INFO - In validation_df : 
+[2023-07-16 19:04:54,274] root - INFO - Missing columns : []
+[2023-07-16 19:04:54,274] root - INFO - In test_df : 
+[2023-07-16 19:04:54,276] root - INFO - Missing columns : []
+[2023-07-16 19:04:54,279] root - INFO - Exporting data into data_validation_artifacts
+[2023-07-16 19:04:54,292] root - INFO - Exiting data_validation stage
+[2023-07-16 19:04:54,292] root - INFO - Data Transformation is started ...
+[2023-07-16 19:04:54,292] root - INFO - reading data from data_ingestion_artifacts
+[2023-07-16 19:04:54,299] root - INFO - Created preprocessor object from ColumnTransformer
+[2023-07-16 19:04:54,299] root - INFO - Exited get_transformer method of DataTransformation class
+[2023-07-16 19:04:54,300] root - INFO - fNumber of X_train:(3883, 8)
+[2023-07-16 19:04:54,300] root - INFO - fNumber of X_test:(481, 8)
+[2023-07-16 19:04:54,300] root - INFO - fNumber of X_valid:(486, 8)
+[2023-07-16 19:04:54,300] root - INFO - Applying transformer object
+[2023-07-16 19:04:54,336] root - INFO - Applying SMOTEENN on Training dataset
+[2023-07-16 19:04:54,738] root - INFO - Applied SMOTEENN on training dataset
+[2023-07-16 19:04:54,738] root - INFO - Applying SMOTEENN on validation dataset
+[2023-07-16 19:04:54,746] root - INFO - Applied SMOTEENN on validation dataset
+[2023-07-16 19:04:54,746] root - INFO - Applying SMOTEENN on testing dataset
+[2023-07-16 19:04:54,754] root - INFO - Applied SMOTEENN on testing dataset
+[2023-07-16 19:04:54,755] root - INFO - saving data array into artifacts
+[2023-07-16 19:04:54,757] root - INFO - saving the transformer object
+[2023-07-16 19:04:54,764] root - INFO - returning data transformatin artifact
+[2023-07-16 19:04:54,765] root - INFO - Model trainer started ...
+[2023-07-16 19:04:54,766] root - INFO - splitting train, valid and test data into x_train, x_test and x_valid, y_valid and y_train, y_test ...
+[2023-07-16 19:04:54,766] root - INFO - Started model training 
+[2023-07-16 19:04:54,767] root - INFO - Training the model 
+[2023-07-16 19:05:26,696] root - INFO - Writing model summary into model.yaml file
+[2023-07-16 19:05:26,701] root - INFO - model triainedl
+[2023-07-16 19:05:26,701] root - INFO - writing report of metrices into model.yaml file
+[2023-07-16 19:05:27,082] root - INFO - plotting graphs
+[2023-07-16 19:05:28,124] root - INFO - observing model performance whether is underfitted or overfitted...
+[2023-07-16 19:05:28,124] root - INFO - save the model as a pickle file....
+[2023-07-16 19:05:28,260] root - INFO - saving pre_process object
+[2023-07-16 19:05:28,261] root - INFO - exiting model trainer

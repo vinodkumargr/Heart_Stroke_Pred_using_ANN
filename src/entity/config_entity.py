@@ -66,3 +66,25 @@ class DataTransformationConfig:
             raise CustomException(e, sys)
         
 
+class ModelTrainerConfig:
+    def __init__(self, training_pipeline_config:TrainingPipelineConfig):
+        try:
+
+            self.model_trainer_dir = os.path.join(training_pipeline_config.artifacts_dir, "Model_Trainer")
+            os.makedirs(self.model_trainer_dir, exist_ok=True)
+
+            graphs_dir = os.path.join("Graphs_folder")
+            os.makedirs(graphs_dir, exist_ok=True)
+
+            self.model_path = os.path.join(self.model_trainer_dir, entity.MODEL_FILE)
+            self.model_config_path = os.path.join(self.model_trainer_dir, entity.MODEL_CONFIG_FILE)
+            self.pre_process_obj = os.path.join(self.model_trainer_dir, entity.TRANSFORMER_OBJ_FILE)
+            self.expected_accuracy:float = entity.EXPECTED_ACCURACY
+
+            self.accuracy_graph = os.path.join(graphs_dir,'accuracy_graph.jpg')
+            self.loss_graph = os.path.join(graphs_dir, "loss_graph.jpg")
+            self.confusion_metric_graph = os.path.join(graphs_dir, "confusion_metric.jpg")
+
+        except Exception as e:
+            raise CustomException(e, sys)
+
