@@ -87,4 +87,29 @@ class ModelTrainerConfig:
 
         except Exception as e:
             raise CustomException(e, sys)
+        
+class ModeEvaluationConfig:
+
+    def __init__(self, training_pipeline_config:TrainingPipelineConfig):
+        try:
+
+            self.change_overfitting_value = 0.01
+
+        except Exception as e:
+            raise CustomException(e,sys)
+        
+
+class ModelPusherConfig:
+    def __init__(self, training_pipeline_config:TrainingPipelineConfig):
+        self.model_pusher_dir = os.path.join(training_pipeline_config.artifacts_dir, "Model_pusher")
+        os.makedirs(self.model_pusher_dir, exist_ok=True)
+
+        self.saved_model_dir = os.path.join("saved_models")
+        #os.makedirs(self.saved_model_dir, exist_ok=True)
+
+        self.pusher_model_dir = os.path.join(self.model_pusher_dir,"saved_models")
+        #os.makedirs(self.pusher_model_dir, exist_ok=True)
+
+        self.pusher_model_path = os.path.join(self.pusher_model_dir, entity.MODEL_FILE)
+        self.pusher_transform_path = os.path.join(self.pusher_model_dir, entity.TRANSFORMER_OBJ_FILE)
 

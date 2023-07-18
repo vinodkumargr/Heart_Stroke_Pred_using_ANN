@@ -41,9 +41,6 @@ class ModelTrainer:
             self.X_valid, self.y_valid = validation_data[:, :-1], validation_data[:, -1]
             self.X_test, self.y_test = test_data[:, :-1], test_data[:, -1]
 
-
-            self.model = Sequential()
-
             self.model = Sequential()
             self.model.add(Dense(128, activation='tanh', input_dim=16, kernel_regularizer=tf.keras.regularizers.l2(0.01)))
             self.model.add(BatchNormalization())
@@ -69,17 +66,23 @@ class ModelTrainer:
             # Define early stopping callback
             early_stopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
 
-            # Fit the model with early stopping
-            self.model_history = self.model.fit(self.X_train, self.y_train, epochs=100, validation_data=(self.X_valid, self.y_valid), validation_split=0.3, callbacks=[early_stopping])
+            # Define ReduceLROnPlateau callback
+            reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=3, min_lr=1e-6)
 
-            #model summary:
-            logging.info("Writing model summary into model.yaml file")
-            append_yaml_file(file_path=entity.MODEL_CONFIG_FILE, content=(self.model.summary()))
+            # Fit the model with early stopping and learning rate reduction
+            self.model_history = self.model.fit(
+                self.X_train, self.y_train,
+                epochs=100,
+                validation_data=(self.X_valid, self.y_valid),
+                validation_split=0.3,
+                callbacks=[early_stopping, reduce_lr]
+            )
 
             return self.model
 
         except Exception as e:
             raise CustomException(e, sys)
+
 
 
     def metrices_report(self, model:keras.models.Sequential):
@@ -88,14 +91,23 @@ class ModelTrainer:
             y_pred = model.predict(self.X_test)
             self.y_pred_classes = (y_pred > 0.5).astype("int32")
             self.score = accuracy_score(self.y_test, self.y_pred_classes)
-            cr = classification_report(self.y_test, self.y_pred_classes)
 
-            print("FINAL MODEL 'ANN'")
-            append_yaml_file(file_path=entity.MODEL_CONFIG_FILE, content=("Model report after tuning and training with best params"))
-            append_yaml_file(file_path=entity.MODEL_CONFIG_FILE, content=(f"best Accuracy : {self.score}"))
-            append_yaml_file(file_path=entity.MODEL_CONFIG_FILE, content={f"report : {cr}"})
+            logging.info(f"model accuracy score : {self.score}")
 
-            return cr
+            # Convert classification report to DataFrame
+            cr_dict = classification_report(self.y_test, self.y_pred_classes, output_dict=True)
+            cr_df = pd.DataFrame(cr_dict).transpose()
+
+            # dataframe of classification report
+            cr_df = cr_df.to_dict()
+
+            # Write the DataFrame to a YAML file
+            append_yaml_file(file_path=entity.MODEL_CONFIG_FILE, content=("Model evaluation metrices ......."))
+            append_yaml_file(file_path=entity.MODEL_CONFIG_FILE, content=cr_df)
+
+            logging.info(f"the report is : {cr_df}")
+
+            return cr_df
 
         except Exception as e:
             raise CustomException(e, sys)
@@ -105,7 +117,7 @@ class ModelTrainer:
         try:
 
             plt.plot(self.model_history.history['loss'], color='black', label='Training Loss')
-            plt.plot(self.model_history.history['val_loss'], color='yellow', label='Validation Loss')
+            plt.plot(self.model_history.history['val_loss'], color='red', label='Validation Loss')
             plt.xlabel('Epochs')
             plt.ylabel('Loss')
             plt.legend()
@@ -120,7 +132,7 @@ class ModelTrainer:
         try:
 
             plt.plot(self.model_history.history['accuracy'], color='black', label='Training Accuracy')
-            plt.plot(self.model_history.history['val_accuracy'], color='yellow', label='Validation Accuracy')
+            plt.plot(self.model_history.history['val_accuracy'], color='red', label='Validation Accuracy')
             plt.xlabel('Epochs')
             plt.ylabel('Accuracy')
             plt.legend()
@@ -214,7 +226,8 @@ class ModelTrainer:
             logging.info("observing model performance whether is underfitted or overfitted...")
             if self.score < self.model_trainer_config.expected_accuracy:
                 raise Exception(f"model expected r2_score is : {self.model_trainer_config.expected_r2_score}, but got model r2_score is : {self.score}")
-                     
+            else:
+                logging.info("model is good, performing well...")         
 
             logging.info("save the model as a pickle file....")
             utils.save_object(file_path=self.model_trainer_config.model_path, 
@@ -226,15 +239,13 @@ class ModelTrainer:
             model_trainer_artifact = artifacts_entity.ModelTrainerArtifact(
                 model_path=self.model_trainer_config.model_path,
                 pre_processing_obj=self.model_trainer_config.pre_process_obj,
-                r2_score = self.score,
-                model_config_path = final_model_report
+                r2_score = self.score
             )
 
             logging.info("exiting model trainer")
 
             return model_trainer_artifact
 
-            
 
         except Exception as e:
             raise CustomException(e, sys)
