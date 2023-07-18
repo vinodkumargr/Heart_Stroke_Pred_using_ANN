@@ -36,3 +36,9 @@ venv.bak/
 
 schema.yaml
 model.yaml
+
+
+Graphs_folder/
+accuracy_graph.jpg
+confusion_matric.jpg
+loss_graph.jpg
