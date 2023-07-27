@@ -39,6 +39,7 @@ class ModelEvaluation:
                 )
                 logging.info(f"model_evaluation_artifact : {model_evaluation_artifact}")
                 
+                return model_evaluation_artifact
 
             # find previous/old model location
             logging.info("finding old model path...")
@@ -52,7 +53,7 @@ class ModelEvaluation:
 
             # read current/new model
             logging.info("reading new model...")
-            current_transformer = utils.load_object(self.data_transformation_artifacts.pre_process_object_path)
+            current_transformer = utils.load_object(self.model_trainer_artifacts.pre_processing_obj)
             current_model = utils.load_object(file_path=self.model_trainer_artifacts.model_path)
 
             # reading old test data and predicting for old model

@@ -4,7 +4,7 @@ import pandas as pd
 import pickle as pkl
 
 # Load the data for the dropdowns
-data = pd.read_csv(data_obj, encoding='latin-1', nrows=8)
+data = pkl.load(open(data_obj, 'rb'))
 
 # Load the trained model and transformer
 model = pkl.load(open(model_obj, 'rb'))
