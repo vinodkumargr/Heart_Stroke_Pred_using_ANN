@@ -35,6 +35,8 @@ files_list = {
     f"{project_name}/entity/config_entity.py",
     f"{project_name}/configuration/mongodb_connection.py",
     f"{project_name}/pipeline/__init__.py",
+    f"{project_name}/pipeline/batch_prediction.py",
+    f"{project_name}/pipeline/training_pipeline.py",
     f"{project_name}/data_access/data.py",
     f"{project_name}/constants/database.py",
     f"{project_name}/logger/__init__.py",
