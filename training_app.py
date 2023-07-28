@@ -12,6 +12,7 @@ transformer = pkl.load(open(transformer, "rb"))
 
 st.title("HEART STROKE PREDICTION")
 
+
 # Age column
 age = st.number_input("AGE", step=1, value=1)
 age = int(age)
@@ -29,10 +30,12 @@ ever_married = st.selectbox("EVER MARRIED", data['ever_married'].unique())
 work_type = st.selectbox('WORK TYPE', data['work_type'].unique())
 
 # Avg glucose level
-avg_glucose_level = st.number_input('AVERAGE GLUCOSE LEVEL')
+avg_glucose_level = st.number_input('AVERAGE GLUCOSE LEVEL', step=1, value=1)
+avg_glucose_level = int(avg_glucose_level)
 
 # BMI
-bmi = st.number_input('BMI (BODY MASS INDEX)')
+bmi = st.number_input('BMI (BODY MASS INDEX)', step=1, value=1)
+bmi = int(bmi)
 
 # Smoking status
 smoking_status = st.selectbox('SMOKING STATUS (0->NO AND 1->YES)', data['smoking_status'].unique())
@@ -52,10 +55,14 @@ if st.button('PREDICT STROKE'):
     df = pd.DataFrame(query_data)
 
     # Perform the same transformations as during training
-    df = transformer.transform(df)
+    if 'stroke' in df.columns:
+        df.drop(columns=['stroke'], inplace=True)
+
+    # Perform the same transformations as during training
+    single_prediction_data = transformer.transform(df)
 
     # Query point
-    y_pred = model.predict(df)
+    y_pred = model.predict(single_prediction_data)
 
     # Display the prediction
     if y_pred[0] == 1:
